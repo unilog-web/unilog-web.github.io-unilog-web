@@ -511,6 +511,14 @@
                             <option value="impossible">Impossible</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="hint">Hints</label>
+                        <select id="hint">
+                            <option value="true" selected>Show hints</option>
+                            <option value="false">Don't show hints</option>
+                        </select>
+                    </div>
 
                     <button class="btn btn-primary" id="start-test">
                         <span></span>
@@ -708,7 +716,7 @@
                         contents: [{ parts: [{ text: prompt }] }],
                         generationConfig: {
                             temperature: 0.7,
-                            maxOutputTokens: 8192
+                            maxOutputTokens: 88192
                         }
                     })
                 });
@@ -741,7 +749,7 @@
             const progress = ((index + 1) / questions.length) * 100;
             progressBar.style.width = `${progress}%`;
             
-            // Replace [BLANK] with visual blank
+           
             const questionText = question.question.replace('[BLANK]', '<span class="blank">______</span>');
             
             let html = `
@@ -764,17 +772,23 @@
             `;
             
             questionDisplay.innerHTML = html;
+            if (document.getElementById('hint').value == 'true') {
+            document.getElementsByClassName('hint-box')[0].style.display = "block";
+            } else {
+                document.getElementsByClassName('hint-box')[0].style.display = "none";
+            }
+
             
-            // Focus on input
+           
             const input = document.getElementById('answer-input');
             input.focus();
             
-            // Save answer on input
+          
             input.addEventListener('input', (e) => {
                 userAnswers[index] = e.target.value;
             });
             
-            // Allow Enter key to go to next question
+            
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     handleNextButton();
@@ -815,7 +829,7 @@
             const normalized = normalizeAnswer(userAnswer);
             const acceptableAnswers = question.acceptableAnswers.map(a => normalizeAnswer(a));
             return acceptableAnswers.some(acceptable => {
-                // Check for exact match or if user answer contains the acceptable answer
+               
                 if (userAnswer == "") {
                     return false;
                 } else {

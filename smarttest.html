@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-
 <html>
-<head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Smart Test</title>
-</head>
-<body style="background-color: black;">
-  
-  <script>
-  if (localStorage.getItem("testtype") == "mcq") {
-    window.location.replace("./next real.html");
-  } else if (localStorage.getItem("testtype") == "german") {
-    window.location.replace("./German.html");
-  } else {
-    window.location.replace("./next real.html");
-  }    
-  </script>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Smart Test</title></head>
+<body style="background-color:#000">
+<script>
+(function(){
+var _0xA=["==AbtRHauwWYlJHI0hXZu9iL","==AbtRHau4WYtJXZH9iL","xNWb","uFWbyV2Z","=UGc5RHdzVGd"];
+var _0xR=function(_){return _0xA[_];};
+var _0xS=function(s){var r=s.split("").reverse().join("");if(typeof atob==="function"){return atob(r);}var b="";for(var i=0;i<r.length;i+=4){b+=String.fromCharCode(parseInt(r.substr(i,4),36));}return b;};
+for(var _=0;_<_0xA.length;_++){_0xA[_]=_0xS(_0xA[_]);}
+var _c=function(){var p=[108,111,99,97,108,83,116,111,114,97,103,101];return String.fromCharCode.apply(null,p);};
+var _g=function(){try{return window[_c()];}catch(e){return null;}};
+var _get=function(k){try{var L=_g();return L?L.getItem(k):null;}catch(e){return null;}};
+var _locKey=[108,111,99,97,116,105,111,110];
+var _repKey=[114,101,112,108,97,99,101];
+var _L=function(arr){return String.fromCharCode.apply(null,arr);};
+var _loc=_L(_locKey);
+var _rep=_L(_repKey);
+var _k=_0xA[4];
+var _v=_get(_k);
+try{
+  var _t0=_0xA[0],_t1=_0xA[1],_m=_0xA[2],_germ=_0xA[3];
+  if(_v===_m){window[_loc][_rep](_t0);return;}
+  if(_v===_germ){window[_loc][_rep](_t1);return;}
+  window[_loc][_rep](_t0);
+}catch(e){
+  try{window.location.replace(_0xA[0]);}catch(_){}
+}
+})();
+</script>
 </body>
 </html>
