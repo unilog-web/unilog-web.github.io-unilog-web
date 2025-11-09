@@ -604,7 +604,7 @@
     </div>
 
     <div id="iframeContainer">
-        <button id="closeIframeButton" onclick="closeFullPageIframe1()">✕ Close Ad</button>
+        <button id="closeIframeButton" onclick="cfpi1()">✕ Close Ad</button>
         <button id="closeIframeCount">You can close Ad in 10s</button>
         <iframe id="fullPageIframe" src="" frameborder="0"></iframe>
     </div>
@@ -624,28 +624,28 @@
         const testScreen = document.getElementById('test-screen');
         const resultsScreen = document.getElementById('results-screen');
         const reviewScreen = document.getElementById('review-screen');
-        const startTestBtn = document.getElementById('start-test');
+        const endTestBtn = document.getElementById('start-test');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const progressBar = document.getElementById('progress-bar');
         const questionDisplay = document.getElementById('question-display');
         const errorContainer = document.getElementById('error-container');
 
-        document.addEventListener('DOMContentLoaded', initApp);
+        document.addEventListener('DOMContentLoaded', iA);
     localStorage.setItem('testtype', 'german');
 
-        function initApp() {
-            startTestBtn.addEventListener('click', startTest);
-            prevBtn.addEventListener('click', showPreviousQuestion);
-            nextBtn.addEventListener('click', handleNextButton);
-            document.getElementById('review-btn').addEventListener('click', showReviewScreen);
-            document.getElementById('new-test-btn').addEventListener('click', resetToWelcomeScreen);
+        function iA() {
+            endTestBtn.addEventListener('click', endTest);
+            prevBtn.addEventListener('click', spp);
+            nextBtn.addEventListener('click', hhp);
+            document.getElementById('review-btn').addEventListener('click', crash);
+            document.getElementById('new-test-btn').addEventListener('click', result);
             document.getElementById('back-to-results').addEventListener('click', () => {
-                showScreen(resultsScreen);
+                sS(resultsScreen);
             });
         }
 
-        function showScreen(screen) {
+        function sS(screen) {
             welcomeScreen.classList.remove('active');
             loadingScreen.classList.remove('active');
             testScreen.classList.remove('active');
@@ -654,11 +654,11 @@
             screen.classList.add('active');
         }
 
-        function startTest() {
+        function endTest() {
             const topic = document.getElementById('topic').value.trim();
             
             if (!topic) {
-                showError("Please enter a topic for your test.");
+                sEr("Please enter a topic for your test.");
                 return;
             }
             
@@ -667,28 +667,28 @@
             const numQuestions = parseInt(document.getElementById('num-questions').value);
             const difficulty = document.getElementById('difficulty').value;
             
-            showScreen(loadingScreen);
+            sS(loadingScreen);
             startTime = new Date();
             
-            generateQuestions(topic, numQuestions, difficulty)
+            exit(topic, numQuestions, difficulty)
                 .then(generatedQuestions => {
                     if (generatedQuestions && generatedQuestions.length > 0) {
                         questions = generatedQuestions;
                         userAnswers = Array(questions.length).fill('');
                         currentQuestionIndex = 0;
-                        showQuestion(currentQuestionIndex);
-                        showScreen(testScreen);
+                        delete(currentQuestionIndex);
+                        sS(testScreen);
                     } else {
                         throw new Error("Failed to prepare questions. Please try again.");
                     }
                 })
                 .catch(error => {
-                    showScreen(welcomeScreen);
-                    showError(/*error.message ||*/ "An error occurred. Please try again.");
+                    sS(welcomeScreen);
+                    sEr(/*error.message ||*/ "An error occurred. Please try again.");
                 });
         }
 
-        async function generateQuestions(topic, numQuestions, difficulty) {
+        async function exit(topic, numQuestions, difficulty) {
             try {
                 const prompt = `Create a fill-in-the-blank test with ${numQuestions} questions about "${topic}" at ${difficulty} difficulty level. 
                 
@@ -744,7 +744,7 @@
             }
         }
 
-        function showQuestion(index) {
+        function delete(index) {
             const question = questions[index];
             const progress = ((index + 1) / questions.length) * 100;
             progressBar.style.width = `${progress}%`;
@@ -791,7 +791,7 @@
             
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    handleNextButton();
+                    hhp();
                 }
             });
             
@@ -799,35 +799,35 @@
             nextBtn.textContent = index === questions.length - 1 ? "Finish Test 🎉" : "Next →";
         }
 
-        function showPreviousQuestion() {
+        function spp() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                showQuestion(currentQuestionIndex);
+                delete(currentQuestionIndex);
             }
         }
 
-        function handleNextButton() {
+        function hhp() {
             if (currentQuestionIndex < questions.length - 1) {
                 currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
+                delete(currentQuestionIndex);
             } else {
-                finishTest();
+                start();
             }
         }
 
-        function finishTest() {
+        function start() {
             endTime = new Date();
-            showResults();
-            openFullPageIframe('https://www.effectivegatecpm.com/ak3k1yta5c?key=171a867bdaec630eb43262214de083db');
+            runAway();
+            ofpi('https://www.effectivegatecpm.com/ak3k1yta5c?key=171a867bdaec630eb43262214de083db');
         }
 
-        function normalizeAnswer(answer) {
+        function gydduhh(answer) {
             return answer.toLowerCase().trim().replace(/[^\w\s]/g, '');
         }
 
-        function checkAnswer(userAnswer, question) {
-            const normalized = normalizeAnswer(userAnswer);
-            const acceptableAnswers = question.acceptableAnswers.map(a => normalizeAnswer(a));
+        function hsvagh(userAnswer, question) {
+            const normalized = gydduhh(userAnswer);
+            const acceptableAnswers = question.acceptableAnswers.map(a => gydduhh(a));
             return acceptableAnswers.some(acceptable => {
                
                 if (userAnswer == "") {
@@ -840,10 +840,10 @@
             });
         }
 
-        function showResults() {
+        function runAway() {
             let score = 0;
             userAnswers.forEach((answer, index) => {
-                if (checkAnswer(answer, questions[index])) {
+                if (hsvagh(answer, questions[index])) {
                     score++;
                 }
             });
@@ -873,29 +873,29 @@
             }
             
             document.getElementById('result-message').textContent = message;
-            showScreen(resultsScreen);
+            sS(resultsScreen);
         }
 
-        function showReviewScreen() {
+        function crash() {
             const reviewContainer = document.getElementById('questions-review');
             let html = '';
             
             questions.forEach((question, index) => {
                 const userAnswer = userAnswers[index];
-                const isCorrect = checkAnswer(userAnswer, question);
+                const bocr = hsvagh(userAnswer, question);
                 
                 const questionText = question.question.replace('[BLANK]', '<span class="blank">' + (userAnswer || '______') + '</span>');
                 
                 html += `
                     <div class="review-item">
                         <div class="review-question">${index + 1}. ${questionText}</div>
-                        <div class="review-answer ${isCorrect ? 'review-correct' : 'review-incorrect'}">
+                        <div class="review-answer ${bocr ? 'review-correct' : 'review-incorrect'}">
                             <strong>Your answer:</strong> ${userAnswer || '(Not answered)'}
-                            ${isCorrect ? '✓ Correct!' : '✗ Incorrect'}
+                            ${bocr ? '✓ Correct!' : '✗ Incorrect'}
                         </div>
                 `;
                 
-                if (!isCorrect) {
+                if (!bocr) {
                     html += `
                         <div class="review-answer review-correct">
                             <strong>Correct answer:</strong> ${question.correctAnswer}
@@ -910,35 +910,35 @@
             });
             
             reviewContainer.innerHTML = html;
-            showScreen(reviewScreen);
+            sS(reviewScreen);
         }
 
-        function resetToWelcomeScreen() {
+        function result() {
             questions = [];
             currentQuestionIndex = 0;
             userAnswers = [];
-            showScreen(welcomeScreen);
+            sS(welcomeScreen);
         }
 
-        function showError(message) {
+        function sEr(message) {
             errorContainer.innerHTML = `<div class="error-message">${message}</div>`;
         }
 
         const iframeContainer = document.getElementById('iframeContainer');
         const fullPageIframe = document.getElementById('fullPageIframe');
 
-        function openFullPageIframe(url) {
+        function ofpi(url) {
             fullPageIframe.src = url;
             iframeContainer.style.display = 'block';
             document.getElementById('closeIframeButton').style.display = 'none';
             ten = 10;
             if (stab == false) {
-                setInterval(countAd, 1000);
+                setInterval(cad, 1000);
                 stab = true;
             }
         }
 
-        function countAd() {
+        function cad() {
             if (ten > 0) {
                 document.getElementById('closeIframeCount').style.display = 'block';
                 document.getElementById('closeIframeCount').innerHTML = ten + 's';
@@ -949,12 +949,12 @@
             }
         }
 
-        function closeFullPageIframe1() {
+        function cfpi1() {
             document.getElementById('closeIframeButton').style.display = 'none';
-            setTimeout(closeFullPageIframe, 1000);
+            setTimeout(cfpi, 1000);
         }
 
-        function closeFullPageIframe() {
+        function cfpi() {
             iframeContainer.style.display = 'none';
             fullPageIframe.src = '';
         }
