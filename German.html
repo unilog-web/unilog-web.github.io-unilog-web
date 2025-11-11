@@ -619,7 +619,7 @@
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/35a87c4f2a3404659f204b3773243384/invoke.js"></script>
     <script>
-        const API_KEY = "AIzaSyCtGVt8eCCpsawzY2_yW4bCrYkYOVtrHt8";
+        const API_KEY = "AIzaSyDhLuPcBYvVOYVAw1gyxP4ig05sLaBYabk";
         let questions = [];
         let currentQuestionIndex = 0;
         let userAnswers = [];
@@ -685,7 +685,7 @@
                         questions = generatedQuestions;
                         userAnswers = Array(questions.length).fill('');
                         currentQuestionIndex = 0;
-                        delete(currentQuestionIndex);
+                        deleteR(currentQuestionIndex);
                         sS(testScreen);
                     } else {
                         throw new Error("Failed to prepare questions. Please try again.");
@@ -753,7 +753,7 @@
             }
         }
 
-        function delete(index) {
+        function deleteR(index) {
             const question = questions[index];
             const progress = ((index + 1) / questions.length) * 100;
             progressBar.style.width = `${progress}%`;
@@ -811,14 +811,14 @@
         function spp() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                delete(currentQuestionIndex);
+                deleteR(currentQuestionIndex);
             }
         }
 
         function hhp() {
             if (currentQuestionIndex < questions.length - 1) {
                 currentQuestionIndex++;
-                delete(currentQuestionIndex);
+                deleteR(currentQuestionIndex);
             } else {
                 start();
             }
